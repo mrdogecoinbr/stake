@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔐 Painel de Autorizações - Shuffle Auto Bot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Painel de Autorizações - Shuffle Auto Bot</h1>
+    <label>ID do Telegram (numérico):</label>
+    <input type="number" id="telegram_id" placeholder="ex: 7370154479" />
+
+    <label>Dias até expirar:</label>
+    <select id="dias">
+      <option value="1">1 dia</option>
+      <option value="3">3 dias</option>
+      <option value="7">7 dias</option>
+      <option value="30">30 dias</option>
+      <option value="9999">Ilimitado</option>
+    </select>
+
+    <button id="adicionar">➕ Adicionar ID</button>
+    <button id="limpar">🧹 Limpar tudo</button>
+
+    <h3>📦 JSON Gerado:</h3>
+    <textarea id="resultado" rows="12" readonly></textarea>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
