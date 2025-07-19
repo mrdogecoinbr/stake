@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Autorizações - Shuffle Auto Bot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, select, button, textarea {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
+    textarea {
+      height: 180px;
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔐 Painel de Autorizações - Shuffle Auto Bot</h2>
+  <label for="id">ID do Telegram (numérico):</label>
+  <input type="text" id="id" placeholder="ex: 7370154479">
+
+  <label for="dias">Dias até expirar:</label>
+  <select id="dias">
+    <option value="1">1 dia</option>
+    <option value="3">3 dias</option>
+    <option value="7">7 dias</option>
+    <option value="15">15 dias</option>
+    <option value="30">30 dias</option>
+  </select>
+
+  <button onclick="adicionarId()">➕ Adicionar ID</button>
+  <button onclick="limparLista()">🧹 Limpar tudo</button>
+
+  <h3>📦 JSON Gerado:</h3>
+  <textarea id="saida" readonly></textarea>
+
+  <script>
+    const lista = {};
+
+    function adicionarId() {
+      const id = document.getElementById('id').value.trim();
+      const dias = parseInt(document.getElementById('dias').value);
+
+      if (!/^\d{6,20}$/.test(id)) {
+        alert("⚠️ ID inválido. Use apenas números do Telegram.");
+        return;
+      }
+
+      const hoje = new Date();
+      hoje.setDate(hoje.getDate() + dias);
+      const validade = hoje.toISOString().split('T')[0];
+
+      lista[id] = validade;
+      atualizarSaida();
+    }
+
+    function atualizarSaida() {
+      document.getElementById('saida').value = JSON.stringify(lista, null, 2);
+    }
+
+    function limparLista() {
+      if (confirm("Tem certeza que deseja limpar tudo?")) {
+        for (let key in lista) delete lista[key];
+        atualizarSaida();
+      }
+    }
+  </script>
+</body>
+</html>
